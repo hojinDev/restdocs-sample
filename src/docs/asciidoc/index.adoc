@@ -1,0 +1,148 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+= API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[introduction]]
+== 소개
+
+사람 API
+
+[[common]]
+== 공통 사항
+
+API에 관계없이 아래 사항을 지켜주셔야 합니다.
+
+=== Domain
+
+|===
+| 환경 | Domain
+
+| 개발서버
+| `http://docs.api.com:8080`
+
+| 운영서버
+| `https://docs.api.com`
+|===
+
+=== Common Response
+
+include::{snippets}/common/custom-response-fields.adoc[]
+
+include::{snippets}/common/custom-response-fields-apiResponseCodes.adoc[]
+
+include::{snippets}/common/custom-response-fields-genders.adoc[]
+
+&#160;
+
+
+== 사람 API
+
+[[persons-add]]
+=== 추가
+
+==== Request
+
+include::{snippets}/persons-add/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/persons-add/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/persons-add/response-fields-data.adoc[]
+
+===== Response HTTP Example
+
+include::{snippets}/persons-add/http-response.adoc[]
+
+&#160;
+
+[[persons-update]]
+=== 다건 조회
+
+==== Request
+
+===== Request HTTP Example
+
+include::{snippets}/persons-find-all/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/persons-find-all/response-fields-data.adoc[]
+
+===== Response HTTP Example:
+
+include::{snippets}/persons-find-all/http-response.adoc[]
+
+&#160;
+
+[[persons-find]]
+=== 단건 조회
+
+==== Request
+
+include::{snippets}/persons-find/path-parameters.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/persons-find/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/persons-find/response-fields-data.adoc[]
+
+===== Response HTTP Example:
+
+include::{snippets}/persons-find/http-response.adoc[]
+
+&#160;
+
+[[persons-update]]
+=== 수정
+
+==== Request
+
+include::{snippets}/persons-update/path-parameters.adoc[]
+
+include::{snippets}/persons-update/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/persons-update/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/persons-update/response-fields-data.adoc[]
+
+===== Response HTTP Example:
+
+include::{snippets}/persons-update/http-response.adoc[]
+
+&#160;
+
+[[persons-delete]]
+=== 삭제
+
+==== Request
+
+include::{snippets}/persons-delete/path-parameters.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/persons-delete/http-request.adoc[]
+
+==== Response
+
+===== Response HTTP Example:
+
+include::{snippets}/persons-delete/http-response.adoc[]
+
+&#160;
