@@ -7,9 +7,7 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.service.dto.PersonDto;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,16 +16,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PersonServiceTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Autowired
     private PersonService personService;
@@ -71,7 +65,7 @@ public class PersonServiceTest {
         List<PersonDto.Response> responseList = personService.findAll();
 
         //then
-        assertThat(responseList.size(), is(2));
+        assertThat(responseList).hasSize(2);
     }
 
     @Test
@@ -89,21 +83,18 @@ public class PersonServiceTest {
         PersonDto.Response response = personService.findById(person.getId());
 
         //then
-        assertThat(response.getFirstName(), is("호진"));
-        assertThat(response.getLastName(), is("이"));
-        assertThat(response.getGender(), is(Gender.MALE));
-        assertThat(response.getAge(), is(36L));
+        assertThat(response.getFirstName()).isEqualTo("호진");
+        assertThat(response.getLastName()).isEqualTo("이");
+        assertThat(response.getGender()).isEqualTo(Gender.MALE);
+        assertThat(response.getAge()).isEqualTo(36L);
     }
 
     @Test
     public void findById_not_found() {
 
-        //expect
-        thrown.expect(NotFoundException.class);
-        thrown.expectMessage("리소스를 찾지 못했습니다.");
+        Throwable exception = assertThrows(NotFoundException.class, () -> personService.findById(0L));
 
-        //when
-        personService.findById(0L);
+        assertThat(exception.getMessage()).isEqualTo("리소스를 찾지 못했습니다.");
     }
 
     @Test
@@ -120,8 +111,8 @@ public class PersonServiceTest {
         PersonDto.Response response = personService.add(create);
 
         //then
-        assertThat(personRepository.count(), is(2L));
-        assertThat(response.getId(), is(notNullValue()));
+        assertThat(personRepository.count()).isEqualTo(2L);
+        assertThat(response.getId()).isEqualTo(9L);
     }
 
     @Test
@@ -134,18 +125,15 @@ public class PersonServiceTest {
         personService.delete(id);
 
         //then
-        assertThat(personRepository.count(), is(0L));
+        assertThat(personRepository.count()).isEqualTo(0);
     }
 
     @Test
     public void delete_not_found() {
 
-        //expect
-        thrown.expect(NotFoundException.class);
-        thrown.expectMessage("리소스를 찾지 못했습니다.");
+        Throwable exception = assertThrows(NotFoundException.class, () -> personService.delete(0L));
 
-        //when
-        personService.delete(0L);
+        assertThat(exception.getMessage()).isEqualTo("리소스를 찾지 못했습니다.");
     }
 
     @Test
@@ -165,9 +153,9 @@ public class PersonServiceTest {
         //then
         personRepository.findById(id)
                 .ifPresent(person -> {
-                    assertThat(person.getFirstName(), is("호진"));
-                    assertThat(person.getLastName(), is("이"));
-        });
+                    assertThat(person.getFirstName()).isEqualTo("호진");
+                    assertThat(person.getLastName()).isEqualTo("이");
+                });
     }
 
     @Test
@@ -178,11 +166,9 @@ public class PersonServiceTest {
         update.setFirstName("호진");
         update.setLastName("이");
 
-        //expect
-        thrown.expect(NotFoundException.class);
-        thrown.expectMessage("리소스를 찾지 못했습니다.");
 
-        //when
-        personService.update(0L, update);
+        Throwable exception = assertThrows(NotFoundException.class, () -> personService.update(0L, update));
+
+        assertThat(exception.getMessage()).isEqualTo("리소스를 찾지 못했습니다.");
     }
 }

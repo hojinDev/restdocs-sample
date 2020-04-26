@@ -4,10 +4,8 @@ import com.example.demo.domain.Gender;
 import com.example.demo.domain.Person;
 import org.junit.Test;
 
-import java.time.LocalDate;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static java.time.LocalDate.of;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonDtoTest {
 
@@ -19,16 +17,16 @@ public class PersonDtoTest {
         create.setFirstName("호진");
         create.setLastName("이");
         create.setGender(Gender.MALE);
-        create.setBirthDate(LocalDate.of(1983, 7, 4));
+        create.setBirthDate(of(1983, 7, 4));
 
         //when
         Person person = create.toEntity();
 
         //then
-        assertThat(person.getFirstName(), is("호진"));
-        assertThat(person.getLastName(), is("이"));
-        assertThat(person.getGender(), is(Gender.MALE));
-        assertThat(person.getBirthDate(), is(LocalDate.of(1983, 7, 4)));
+        assertThat(person.getFirstName()).isEqualTo("호진");
+        assertThat(person.getLastName()).isEqualTo("이");
+        assertThat(person.getGender()).isEqualTo(Gender.MALE);
+        assertThat(person.getBirthDate()).isEqualTo(of(1983, 7, 4));
     }
 
     @Test
@@ -39,22 +37,22 @@ public class PersonDtoTest {
                 .firstName("호진")
                 .lastName("이")
                 .gender(Gender.MALE)
-                .birthDate(LocalDate.of(1983, 7, 4))
+                .birthDate(of(1983, 7, 4))
                 .build();
 
         //when
         PersonDto.Update update = new PersonDto.Update();
         update.setFirstName("호석");
         update.setLastName("이");
-        update.setBirthDate(LocalDate.of(1985, 2, 1));
+        update.setBirthDate(of(1985, 2, 1));
 
         update.apply(person);
 
         //then
-        assertThat(person.getFirstName(), is("호석"));
-        assertThat(person.getLastName(), is("이"));
-        assertThat(person.getGender(), is(Gender.MALE));
-        assertThat(person.getBirthDate(), is(LocalDate.of(1985, 2, 1)));
+        assertThat(person.getFirstName()).isEqualTo("호석");
+        assertThat(person.getLastName()).isEqualTo("이");
+        assertThat(person.getGender()).isEqualTo(Gender.MALE);
+        assertThat(person.getBirthDate()).isEqualTo(of(1985, 2, 1));
     }
 
     @Test
@@ -65,17 +63,17 @@ public class PersonDtoTest {
                 .firstName("호진")
                 .lastName("이")
                 .gender(Gender.MALE)
-                .birthDate(LocalDate.of(1983, 7, 4))
+                .birthDate(of(1983, 7, 4))
                 .build();
 
         //when
         PersonDto.Response response = PersonDto.Response.of(person);
 
         //then
-        assertThat(response.getAge(), is(36L));
-        assertThat(response.getFirstName(), is("호진"));
-        assertThat(response.getLastName(), is("이"));
-        assertThat(response.getGender(), is(Gender.MALE));
-        assertThat(response.getBirthDate(), is(LocalDate.of(1983, 7, 4)));
+        assertThat(response.getAge()).isEqualTo(36L);
+        assertThat(response.getFirstName()).isEqualTo("호진");
+        assertThat(response.getLastName()).isEqualTo("이");
+        assertThat(response.getGender()).isEqualTo(Gender.MALE);
+        assertThat(response.getBirthDate()).isEqualTo(of(1983, 7, 4));
     }
 }
