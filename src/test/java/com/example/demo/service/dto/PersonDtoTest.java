@@ -72,7 +72,7 @@ public class PersonDtoTest {
         PersonDto.Response response = PersonDto.Response.of(person);
 
         //then
-        assertThat(response.getAge(), is(35L));
+        assertThat(response.getAge(), is(36L));
         assertThat(response.getFirstName(), is("호진"));
         assertThat(response.getLastName(), is("이"));
         assertThat(response.getGender(), is(Gender.MALE));

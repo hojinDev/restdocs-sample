@@ -92,7 +92,7 @@ public class PersonServiceTest {
         assertThat(response.getFirstName(), is("호진"));
         assertThat(response.getLastName(), is("이"));
         assertThat(response.getGender(), is(Gender.MALE));
-        assertThat(response.getAge(), is(35L));
+        assertThat(response.getAge(), is(36L));
     }
 
     @Test
