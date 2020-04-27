@@ -15,20 +15,22 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Person {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Unit {
 
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
+    private String name;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private Job job;
 
     @Column(nullable = false)
     private LocalDate birthDate;
@@ -36,20 +38,16 @@ public class Person {
     private String hobby;
 
     @Builder
-    private Person(String firstName, String lastName, Gender gender, LocalDate birthDate, String hobby) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
+    private Unit(String name, Gender gender, Job job, LocalDate birthDate, String hobby) {
+        this.name = name;
         this.gender = gender;
+        this.job = job;
         this.birthDate = birthDate;
         this.hobby = hobby;
     }
 
-    public Person update(String firstName, String lastName, LocalDate birthDate, String hobby) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
+    public void update(Job job, String hobby) {
+        this.job = job;
         this.hobby = hobby;
-        return this;
     }
 }

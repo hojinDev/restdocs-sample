@@ -1,9 +1,11 @@
 package com.example.demo.api.controller.document;
 
+import com.example.demo.api.controller.api.controller.Docs;
+import com.example.demo.api.controller.api.controller.EnumViewController;
 import com.example.demo.api.controller.document.utils.CustomResponseFieldsSnippet;
-import com.example.demo.domain.Gender;
-import com.example.demo.response.ApiResponseCode;
-import com.example.demo.utils.EnumType;
+import com.example.demo.response.ApiResponseDto;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,10 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.restdocs.payload.PayloadSubsectionExtractor;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -30,12 +34,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(EnumViewController.class)
+@WebMvcTest(value = EnumViewController.class)
 @AutoConfigureRestDocs
 public class CommonDocumentationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    protected ObjectMapper objectMapper;
+
+    private static FieldDescriptor[] enumConvertFieldDescriptor(Map<String, String> enumValues) {
+
+        return enumValues.entrySet().stream()
+                .map(x -> fieldWithPath(x.getKey()).description(x.getValue()))
+                .toArray(FieldDescriptor[]::new);
+    }
 
     @Test
     public void commons() throws Exception {
@@ -45,6 +59,9 @@ public class CommonDocumentationTests {
                 get("/docs")
                         .accept(MediaType.APPLICATION_JSON)
         );
+
+        MvcResult mvcResult = result.andReturn();
+        Docs docs = getData(mvcResult);
 
         //then
         result.andExpect(status().isOk())
@@ -57,19 +74,37 @@ public class CommonDocumentationTests {
                         ),
                         customResponseFields("custom-response", beneathPath("data.apiResponseCodes").withSubsectionId("apiResponseCodes"),
                                 attributes(key("title").value("응답코드")),
-                                enumConvertFieldDescriptor(ApiResponseCode.values())
+                                enumConvertFieldDescriptor(docs.getApiResponseCodes())
                         ),
                         customResponseFields("custom-response", beneathPath("data.genders").withSubsectionId("genders"),
                                 attributes(key("title").value("성별")),
-                                enumConvertFieldDescriptor(Gender.values())
+                                enumConvertFieldDescriptor(docs.getGenders())
+                        ),
+                        customResponseFields("custom-response", beneathPath("data.jobs").withSubsectionId("jobs"),
+                                attributes(key("title").value("직업")),
+                                enumConvertFieldDescriptor(docs.getJobs())
+                        ),
+                        customResponseFields("custom-response", beneathPath("data.jobsV1").withSubsectionId("jobsV1"),
+                                attributes(key("title").value("직업")),
+                                enumConvertFieldDescriptor(docs.getJobsV1())
+                        ),
+                        customResponseFields("custom-response", beneathPath("data.jobsV2").withSubsectionId("jobsV2"),
+                                attributes(key("title").value("직업")),
+                                enumConvertFieldDescriptor(docs.getJobsV2())
+                        ),
+                        customResponseFields("custom-response", beneathPath("data.jobsV3").withSubsectionId("jobsV3"),
+                                attributes(key("title").value("직업")),
+                                enumConvertFieldDescriptor(docs.getJobsV3())
                         )
                 ));
     }
 
-    private FieldDescriptor[] enumConvertFieldDescriptor(EnumType[] enumTypes) {
-        return Arrays.stream(enumTypes)
-                .map(enumType -> fieldWithPath(enumType.getId()).description(enumType.getText()))
-                .toArray(FieldDescriptor[]::new);
+    Docs getData(MvcResult result) throws IOException {
+        ApiResponseDto<Docs> apiResponseDto = objectMapper.readValue(result.getResponse().getContentAsByteArray(),
+                new TypeReference<ApiResponseDto<Docs>>() {
+                });
+
+        return apiResponseDto.getData();
     }
 
     public static CustomResponseFieldsSnippet customResponseFields(String type,

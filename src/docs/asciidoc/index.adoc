@@ -37,112 +37,207 @@ include::{snippets}/common/custom-response-fields.adoc[]
 
 include::{snippets}/common/custom-response-fields-apiResponseCodes.adoc[]
 
+include::{snippets}/common/custom-response-fields-jobs.adoc[]
+
+include::{snippets}/common/custom-response-fields-jobsV1.adoc[]
+
+include::{snippets}/common/custom-response-fields-jobsV2.adoc[]
+
+include::{snippets}/common/custom-response-fields-jobsV3.adoc[]
+
 include::{snippets}/common/custom-response-fields-genders.adoc[]
 
 &#160;
 
+== 유닛 API
 
-== 사람 API
-
-[[persons-add]]
-=== 추가
+[[units-add-V1]]
+=== 추가 Ver.1
 
 ==== Request
 
-include::{snippets}/persons-add/request-fields.adoc[]
+include::{snippets}/units-add-v1/request-fields.adoc[]
 
 ===== Request HTTP Example
 
-include::{snippets}/persons-add/http-request.adoc[]
+include::{snippets}/units-add-v1/http-request.adoc[]
 
 ==== Response
 
-include::{snippets}/persons-add/response-fields-data.adoc[]
+include::{snippets}/units-add-v1/response-fields-data.adoc[]
 
 ===== Response HTTP Example
 
-include::{snippets}/persons-add/http-response.adoc[]
+include::{snippets}/units-add-v1/http-response.adoc[]
 
 &#160;
 
-[[persons-update]]
+[[units-add-V2]]
+=== 추가 Ver.2
+
+==== Request
+
+include::{snippets}/units-add-v2/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/units-add-v2/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/units-add-v2/response-fields-data.adoc[]
+
+===== Response HTTP Example
+
+include::{snippets}/units-add-v2/http-response.adoc[]
+
+&#160;
+
+[[units-add-V3]]
+=== 추가 Ver.3
+
+==== Request
+
+include::{snippets}/units-add-v3/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/units-add-v3/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/units-add-v3/response-fields-data.adoc[]
+
+===== Response HTTP Example
+
+include::{snippets}/units-add-v3/http-response.adoc[]
+
+&#160;
+
+[[units-update]]
 === 다건 조회
 
 ==== Request
 
 ===== Request HTTP Example
 
-include::{snippets}/persons-find-all/http-request.adoc[]
+include::{snippets}/units-find-all/http-request.adoc[]
 
 ==== Response
 
-include::{snippets}/persons-find-all/response-fields-data.adoc[]
+include::{snippets}/units-find-all/response-fields-data.adoc[]
 
 ===== Response HTTP Example:
 
-include::{snippets}/persons-find-all/http-response.adoc[]
+include::{snippets}/units-find-all/http-response.adoc[]
 
 &#160;
 
-[[persons-find]]
+[[units-find]]
 === 단건 조회
 
 ==== Request
 
-include::{snippets}/persons-find/path-parameters.adoc[]
+include::{snippets}/units-find/path-parameters.adoc[]
 
 ===== Request HTTP Example
 
-include::{snippets}/persons-find/http-request.adoc[]
+include::{snippets}/units-find/http-request.adoc[]
 
 ==== Response
 
-include::{snippets}/persons-find/response-fields-data.adoc[]
+include::{snippets}/units-find/response-fields-data.adoc[]
 
 ===== Response HTTP Example:
 
-include::{snippets}/persons-find/http-response.adoc[]
+include::{snippets}/units-find/http-response.adoc[]
 
 &#160;
 
-[[persons-update]]
-=== 수정
+[[units-update-V1]]
+=== 수정 Ver.1
 
 ==== Request
 
-include::{snippets}/persons-update/path-parameters.adoc[]
+include::{snippets}/units-update-V1/path-parameters.adoc[]
 
-include::{snippets}/persons-update/request-fields.adoc[]
+include::{snippets}/units-update-V1/request-fields.adoc[]
 
 ===== Request HTTP Example
 
-include::{snippets}/persons-update/http-request.adoc[]
+include::{snippets}/units-update-V1/http-request.adoc[]
 
 ==== Response
 
-include::{snippets}/persons-update/response-fields-data.adoc[]
+include::{snippets}/units-update-V1/response-fields-data.adoc[]
 
 ===== Response HTTP Example:
 
-include::{snippets}/persons-update/http-response.adoc[]
+include::{snippets}/units-update-V1/http-response.adoc[]
 
 &#160;
 
-[[persons-delete]]
+[[units-update-V2]]
+=== 수정 Ver.2
+
+==== Request
+
+include::{snippets}/units-update-V2/path-parameters.adoc[]
+
+include::{snippets}/units-update-V2/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/units-update-V2/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/units-update-V2/response-fields-data.adoc[]
+
+===== Response HTTP Example:
+
+include::{snippets}/units-update-V2/http-response.adoc[]
+
+&#160;
+
+[[units-update-V3]]
+=== 수정 Ver.3
+
+==== Request
+
+include::{snippets}/units-update-V3/path-parameters.adoc[]
+
+include::{snippets}/units-update-V3/request-fields.adoc[]
+
+===== Request HTTP Example
+
+include::{snippets}/units-update-V3/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/units-update-V3/response-fields-data.adoc[]
+
+===== Response HTTP Example:
+
+include::{snippets}/units-update-V3/http-response.adoc[]
+
+&#160;
+
+[[units-delete]]
 === 삭제
 
 ==== Request
 
-include::{snippets}/persons-delete/path-parameters.adoc[]
+include::{snippets}/units-delete/path-parameters.adoc[]
 
 ===== Request HTTP Example
 
-include::{snippets}/persons-delete/http-request.adoc[]
+include::{snippets}/units-delete/http-request.adoc[]
 
 ==== Response
 
 ===== Response HTTP Example:
 
-include::{snippets}/persons-delete/http-response.adoc[]
+include::{snippets}/units-delete/http-response.adoc[]
 
 &#160;
