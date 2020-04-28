@@ -14,6 +14,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.example.demo.api.controller.document.utils.ApiDocumentUtils.getDocumentRequest;
 import static com.example.demo.api.controller.document.utils.ApiDocumentUtils.getDocumentResponse;
 import static com.example.demo.api.controller.document.utils.DocumentFormatGenerator.getDateFormat;
+import static com.example.demo.api.controller.document.utils.DocumentLinkGenerator.DocUrl.GENDER;
+import static com.example.demo.api.controller.document.utils.DocumentLinkGenerator.DocUrl.JOB;
+import static com.example.demo.api.controller.document.utils.DocumentLinkGenerator.DocUrl.JOBV1;
+import static com.example.demo.api.controller.document.utils.DocumentLinkGenerator.generateLinkCode;
+import static com.example.demo.api.controller.document.utils.DocumentLinkGenerator.generateText;
 import static com.example.demo.domain.Gender.MALE;
 import static com.example.demo.domain.Job.HOMEMAKER;
 import static java.time.LocalDate.of;
@@ -67,16 +72,16 @@ public class UnitUpdateV1DocumentationTests extends ApiDocumentationTest {
                                 parameterWithName("id").description("아이디")
                         ),
                         requestFields(
-                                fieldWithPath("job").type(JsonFieldType.STRING).description("직업"),
+                                fieldWithPath("job").type(JsonFieldType.STRING).description(generateLinkCode(JOBV1)),
                                 fieldWithPath("hobby").type(JsonFieldType.STRING).description("취미").optional()
                         ),
                         responseFields(beneathPath("data").withSubsectionId("data"),
                                 fieldWithPath("id").type(JsonFieldType.NUMBER).description("아이디"),
                                 fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
-                                fieldWithPath("job").type(JsonFieldType.STRING).description("직업 코드"),
-                                fieldWithPath("jobName").type(JsonFieldType.STRING).description("직업 명"),
-                                fieldWithPath("gender").type(JsonFieldType.STRING).description("성별 코드"),
-                                fieldWithPath("genderName").type(JsonFieldType.STRING).description("성별 명"),
+                                fieldWithPath("job").type(JsonFieldType.STRING).description(generateLinkCode(JOB)),
+                                fieldWithPath("jobName").type(JsonFieldType.STRING).description(generateText(JOB)),
+                                fieldWithPath("gender").type(JsonFieldType.STRING).description(generateLinkCode(GENDER)),
+                                fieldWithPath("genderName").type(JsonFieldType.STRING).description(generateText(GENDER)),
                                 fieldWithPath("birthDate").type(JsonFieldType.STRING).attributes(getDateFormat()).description("생년월일"),
                                 fieldWithPath("hobby").type(JsonFieldType.STRING).description("취미")
                         )
