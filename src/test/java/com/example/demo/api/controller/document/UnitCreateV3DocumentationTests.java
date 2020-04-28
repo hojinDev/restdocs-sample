@@ -1,23 +1,14 @@
 package com.example.demo.api.controller.document;
 
-import com.example.demo.api.controller.UnitControllerV3;
-import com.example.demo.service.UnitService;
+import com.example.demo.ApiDocumentationTest;
 import com.example.demo.service.dto.UnitCreateDto;
 import com.example.demo.service.dto.UnitDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.example.demo.api.controller.document.utils.ApiDocumentUtils.getDocumentRequest;
@@ -36,25 +27,13 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(UnitControllerV3.class)
-@AutoConfigureRestDocs
-public class UnitCreateV3DocumentationTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private UnitService UnitService;
+public class UnitCreateV3DocumentationTests extends ApiDocumentationTest {
 
     @Test
     public void add() throws Exception {
 
         //given
-        given(UnitService.add(any(UnitCreateDto.class)))
+        given(unitService.add(any(UnitCreateDto.class)))
                 .willReturn(UnitDto.builder()
                         .id(1L)
                         .name("고길동")

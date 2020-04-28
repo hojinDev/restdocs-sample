@@ -1,22 +1,15 @@
 package com.example.demo.api.controller.document;
 
+import com.example.demo.ApiDocumentationTest;
 import com.example.demo.api.controller.api.controller.Docs;
-import com.example.demo.api.controller.api.controller.EnumViewController;
 import com.example.demo.api.controller.document.utils.CustomResponseFieldsSnippet;
 import com.example.demo.response.ApiResponseDto;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.restdocs.payload.PayloadSubsectionExtractor;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -33,23 +26,7 @@ import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = EnumViewController.class)
-@AutoConfigureRestDocs
-public class CommonDocumentationTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    protected ObjectMapper objectMapper;
-
-    private static FieldDescriptor[] enumConvertFieldDescriptor(Map<String, String> enumValues) {
-
-        return enumValues.entrySet().stream()
-                .map(x -> fieldWithPath(x.getKey()).description(x.getValue()))
-                .toArray(FieldDescriptor[]::new);
-    }
+public class CommonDocumentationTests extends ApiDocumentationTest {
 
     @Test
     public void commons() throws Exception {
@@ -97,6 +74,13 @@ public class CommonDocumentationTests {
                                 enumConvertFieldDescriptor(docs.getJobsV3())
                         )
                 ));
+    }
+
+    private static FieldDescriptor[] enumConvertFieldDescriptor(Map<String, String> enumValues) {
+
+        return enumValues.entrySet().stream()
+                .map(x -> fieldWithPath(x.getKey()).description(x.getValue()))
+                .toArray(FieldDescriptor[]::new);
     }
 
     Docs getData(MvcResult result) throws IOException {

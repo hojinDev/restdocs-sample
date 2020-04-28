@@ -1,18 +1,10 @@
 package com.example.demo.api.controller.document;
 
-import com.example.demo.api.controller.UnitController;
-import com.example.demo.service.UnitService;
+import com.example.demo.ApiDocumentationTest;
 import com.example.demo.service.dto.UnitDto;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
@@ -35,22 +27,13 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(UnitController.class)
-@AutoConfigureRestDocs
-public class UnitReadDocumentationTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private UnitService UnitService;
+public class UnitReadDocumentationTests extends ApiDocumentationTest {
 
     @Test
     public void findById() throws Exception {
 
         //given
-        given(UnitService.findById(1L))
+        given(unitService.findById(1L))
                 .willReturn(UnitDto.builder()
                         .id(1L)
                         .name("고길동")
@@ -111,7 +94,7 @@ public class UnitReadDocumentationTests {
                         .build()
         );
 
-        given(UnitService.findAll())
+        given(unitService.findAll())
                 .willReturn(responseList);
 
         //when

@@ -1,23 +1,14 @@
 package com.example.demo.api.controller.document;
 
-import com.example.demo.api.controller.UnitControllerV1;
-import com.example.demo.service.UnitService;
+import com.example.demo.ApiDocumentationTest;
 import com.example.demo.service.dto.UnitDto;
 import com.example.demo.service.dto.UnitUpdateDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.example.demo.api.controller.document.utils.ApiDocumentUtils.getDocumentRequest;
@@ -39,25 +30,13 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(UnitControllerV1.class)
-@AutoConfigureRestDocs
-public class UnitUpdateV1DocumentationTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private UnitService UnitService;
+public class UnitUpdateV1DocumentationTests extends ApiDocumentationTest {
 
     @Test
     public void update() throws Exception {
 
         //given
-        given(UnitService.update(eq(1L), any(UnitUpdateDto.class)))
+        given(unitService.update(eq(1L), any(UnitUpdateDto.class)))
                 .willReturn(UnitDto.builder()
                         .id(1L)
                         .name("고길동")
