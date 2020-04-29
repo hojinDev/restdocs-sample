@@ -1,0 +1,9 @@
+ifndef::snippets[]
+:snippets: ../../../../build/generated-snippets
+endif::[]
+= API Document
+:doctype: book
+:icons: font
+
+[[jobV1]]
+include::{snippets}/common/custom-response-fields-jobsV1.adoc[]

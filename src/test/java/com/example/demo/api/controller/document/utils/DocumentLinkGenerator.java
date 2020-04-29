@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 public interface DocumentLinkGenerator {
 
     static String generateLinkCode(DocUrl docUrl) {
-        return String.format("<<%s,%s %s>>", docUrl.hashId, docUrl.text, "코드");
+        return String.format("link:common/%s.html[%s %s,role=\"popup\"]", docUrl.pageId, docUrl.text, "코드");
     }
 
     static String generateText(DocUrl docUrl) {
@@ -22,7 +22,7 @@ public interface DocumentLinkGenerator {
         GENDER("gender", "성별"),
         ;
 
-        private final String hashId;
+        private final String pageId;
         @Getter
         private final String text;
     }
