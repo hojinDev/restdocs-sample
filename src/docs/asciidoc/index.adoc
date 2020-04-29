@@ -8,6 +8,7 @@ endif::[]
 :toc: left
 :toclevels: 3
 :sectlinks:
+:docinfo: shared-head
 
 [[introduction]]
 == 소개
@@ -36,21 +37,6 @@ API에 관계없이 아래 사항을 지켜주셔야 합니다.
 include::{snippets}/common/custom-response-fields.adoc[]
 
 include::{snippets}/common/custom-response-fields-apiResponseCodes.adoc[]
-
-[[job]]
-include::{snippets}/common/custom-response-fields-jobs.adoc[]
-
-[[jobV1]]
-include::{snippets}/common/custom-response-fields-jobsV1.adoc[]
-
-[[jobV2]]
-include::{snippets}/common/custom-response-fields-jobsV2.adoc[]
-
-[[jobV3]]
-include::{snippets}/common/custom-response-fields-jobsV3.adoc[]
-
-[[gender]]
-include::{snippets}/common/custom-response-fields-genders.adoc[]
 
 &#160;
 

@@ -1,0 +1,36 @@
+<script>
+    function ready(callbackFunc) {
+        if (document.readyState !== 'loading') {
+            // Document is already ready, call the callback directly
+            callbackFunc();
+        } else if (document.addEventListener) {
+            // All modern browsers to register DOMContentLoaded
+            document.addEventListener('DOMContentLoaded', callbackFunc);
+        } else {
+            // Old IE browsers
+            document.attachEvent('onreadystatechange', function () {
+                if (document.readyState === 'complete') {
+                    callbackFunc();
+                }
+            });
+        }
+    }
+
+    function openPopup(event) {
+
+        const target = event.target;
+        if (target.className !== "popup") {
+            return;
+        }
+
+        event.preventDefault();
+        const screenX = event.screenX;
+        const screenY = event.screenY;
+        window.open(target.href, target.text, `left=${screenX}, top=${screenY}, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no`);
+    }
+
+    ready(function () {
+        const el = document.getElementById("content");
+        el.addEventListener("click", event => openPopup(event), false);
+    });
+</script>
